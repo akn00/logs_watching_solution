@@ -7,12 +7,10 @@ function App() {
     const eventSource = new EventSource('http://localhost:4000');
 
     eventSource.onmessage = (event) => {
-      setLog(prevLog => {
-        const newLog = prevLog + event.data;
-        const lines = newLog.split('\n');
-        const firstTenLines = lines.slice(0, 10).join('\n');
-        return firstTenLines;
-      });
+      const newData = event.data;
+      const lines = newData.split('\n');
+      const firstTenLines = lines.slice(0, 10).join('\n');
+      setLog(firstTenLines);
     };
 
     return () => {
